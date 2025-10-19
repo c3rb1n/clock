@@ -1,0 +1,27 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@eslint/markdown": "^7.4.0",
+    "@stylistic/eslint-plugin": "^5.4.0",
+    "eslint": "^9.37.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-sonarjs": "^3.0.5",
+    "eslint-plugin-unicorn": "^61.0.2",
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^12.1.7",
+    "stylelint": "^16.19.1",
+    "stylelint-config-standard": "^38.0.0"
+  }
+}
