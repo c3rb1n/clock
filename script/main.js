@@ -1,7 +1,16 @@
 const INTERVAL_TIME = 1000;
 const TEN_HOURS = 10;
 
-let currentDateStorage = '';
+let currentDate;
+let currentTheme;
+
+const setTheme = theme => {
+    const body = document.querySelector('body');
+
+    currentTheme = theme;
+
+    body.className = currentTheme;
+};
 
 const setTime = () => {
     const newTime = new Date().toLocaleTimeString();
@@ -21,11 +30,10 @@ const setTime = () => {
     clockTime.append(amPmElement);
 };
 
-const setDate = () => {
-    const newDate = new Date().toLocaleDateString('ru');
+const setDate = newDate => {
     const clockDate = document.querySelector('.clock__date');
 
-    currentDateStorage = newDate;
+    currentDate = newDate;
 
     clockDate.innerHTML = '';
 
@@ -33,10 +41,19 @@ const setDate = () => {
 };
 
 const tick = () => {
+    const newDate = new Date().toLocaleDateString('ru');
+    const [hoursRuLocale] = new Date().toLocaleTimeString('ru').split(':');
+    const isDay = +hoursRuLocale >= 6 && +hoursRuLocale < 18;
+    const theme = isDay ? 'day' : 'night';
+
     setTime();
 
-    if (currentDateStorage !== new Date().toLocaleDateString('ru')) {
-        setDate();
+    if (currentDate !== newDate) {
+        setDate(newDate);
+    }
+
+    if (currentTheme !== theme) {
+        setTheme(theme);
     }
 };
 

@@ -1,15 +1,15 @@
 @import '../common/normalize.css';
+@import '../common/themes/day.css';
+@import '../common/themes/night.css';
 
 :root {
-    --bg-color: #000;
-    --main-color: #9326ea;
     --time-font-size: 48px;
     --date-font-size: 68px;
 }
 
 body {
-    background-color: var(--bg-color);
     font-family: Montserrat, sans-serif;
+    font-weight: bold;
 }
 
 main {
@@ -21,13 +21,6 @@ main {
 
 .clock {
     min-width: 300px;
-    color: var(--main-color);
-    text-shadow:
-        0 0 5px var(--main-color),
-        0 0 10px var(--main-color),
-        0 0 20px var(--main-color),
-        0 0 0.5em var(--main-color),
-        0 0 1em var(--main-color);
 }
 
 .clock__time {
