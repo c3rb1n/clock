@@ -2,10 +2,6 @@
     --bg-color-day: #ccc;
 }
 
-.day {
-    background-color: var(--bg-color-day);
-}
-
 .day .clock {
     animation: 2.5s spin infinite;
 }

@@ -1,12 +1,11 @@
 :root {
     --bg-color-night: #000;
     --main-color-night: #fff;
-    --second-color-night: #222;
+    --second-color-night: #5c5c5c;
     --glowing-color-night: #9326ea;
 }
 
 .night {
-    background-color: var(--bg-color-night);
     animation: glow 5s linear infinite;
 }
 
@@ -15,7 +14,7 @@
 @keyframes glow {
     0%, 5%, 10.1%, 15.1%, 25.1%, 45%, 70.1%, 90%, 100% {
         color: var(--second-color-night);
-        text-shadow: 0 0 0 #222;
+        text-shadow: 0 0 0 var(--second-color-night);
     }
 
     5.1%, 10%, 15.2%, 25%, 45.1%, 70%, 90.1%, 95% {
