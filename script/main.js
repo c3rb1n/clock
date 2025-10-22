@@ -1,7 +1,8 @@
 const INTERVAL_TIME = 1000;
-const MORNING_EVENING_TIME = 8;
-const MIDDAY_MIDNIGHT = 12;
+const MORNING_EVENING_TIME = 7;
+const MIDDAY_MIDNIGHT_TIME = 12;
 const TEN_HOURS = 10;
+const ZERO_INDEX = 0;
 
 const backgrounds = [
     '#000000',
@@ -25,8 +26,8 @@ let currentAmPm;
 let currentTheme;
 
 const setBackgroundColor = body => {
-    const backgroundIdex = currentHours === MIDDAY_MIDNIGHT ? 0 : currentHours;
-    const currentBackgroundColor = (currentAmPm === 'AM' ? backgrounds : backgrounds.toReversed())[backgroundIdex];
+    const backgroundIndex = currentHours === MIDDAY_MIDNIGHT_TIME ? ZERO_INDEX : currentHours;
+    const currentBackgroundColor = (currentAmPm === 'AM' ? backgrounds : backgrounds.toReversed())[backgroundIndex];
 
     body.style = `background-color: ${currentBackgroundColor}`;
 };
@@ -64,9 +65,11 @@ const tick = () => {
     const newTime = new Date().toLocaleTimeString();
     const [time, amPm] = newTime.split(' ');
     const [hours, mins, secs] = time.split(':');
-    const isMorning = amPm === 'AM' && +hours >= MORNING_EVENING_TIME;
-    const isEvening = amPm === 'PM' && +hours >= MORNING_EVENING_TIME;
-    const isDay = isMorning && !isEvening;
+    const isMidday = amPm === 'PM' && +hours === MIDDAY_MIDNIGHT_TIME;
+    const isMidnight = amPm === 'AM' && +hours === MIDDAY_MIDNIGHT_TIME;
+    const isMorning = amPm === 'AM' && +hours >= MORNING_EVENING_TIME && !isMidnight;
+    const isNotEvening = amPm === 'PM' && +hours < MORNING_EVENING_TIME;
+    const isDay = isMorning || isMidday || isNotEvening;
     const theme = isDay ? 'day' : 'night';
 
     currentAmPm = amPm;
