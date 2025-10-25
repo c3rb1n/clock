@@ -1,3 +1,5 @@
+import {ClockDate} from './components/Date/date.js';
+
 const INTERVAL_TIME = 1000;
 const MORNING_EVENING_TIME = 7;
 const MIDDAY_MIDNIGHT_TIME = 12;
@@ -51,14 +53,6 @@ const setTime = (hours, mins, secs) => {
     clockTime.append(amPmElement);
 };
 
-const setDate = newDate => {
-    const clockDate = document.querySelector('.clock__date');
-
-    clockDate.innerHTML = '';
-
-    clockDate.textContent = newDate;
-};
-
 const tick = () => {
     const body = document.querySelector('body');
     const newDate = new Date().toLocaleDateString('ru');
@@ -85,7 +79,8 @@ const tick = () => {
     if (currentDate !== newDate) {
         currentDate = newDate;
 
-        setDate(newDate);
+        // eslint-disable-next-line sonarjs/constructor-for-side-effects, no-new
+        new ClockDate(newDate);
     }
 
     if (currentTheme !== theme) {
