@@ -1,4 +1,5 @@
 import {ClockDate} from './components/Date/date.js';
+import {ClockTime} from './components/Time/time.js';
 
 const INTERVAL_TIME = 1000;
 const MORNING_EVENING_TIME = 7;
@@ -38,27 +39,13 @@ const setTheme = body => {
     body.className = currentTheme;
 };
 
-const setTime = (hours, mins, secs) => {
-    const resultTime = `${+hours < TEN_HOURS ? '0' : ''}${hours}:${mins}:${secs}`;
-    const clockTime = document.querySelector('.clock__time');
-    const timeElement = document.createElement('span');
-    const amPmElement = document.createElement('span');
-
-    clockTime.innerHTML = '';
-
-    timeElement.textContent = resultTime;
-    amPmElement.textContent = currentAmPm;
-
-    clockTime.append(timeElement);
-    clockTime.append(amPmElement);
-};
-
 const tick = () => {
     const body = document.querySelector('body');
     const newDate = new Date().toLocaleDateString('ru');
     const newTime = new Date().toLocaleTimeString();
     const [time, amPm] = newTime.split(' ');
     const [hours, mins, secs] = time.split(':');
+    const resultTime = `${+hours < TEN_HOURS ? '0' : ''}${hours}:${mins}:${secs}`;
     const isMidday = amPm === 'PM' && +hours === MIDDAY_MIDNIGHT_TIME;
     const isMidnight = amPm === 'AM' && +hours === MIDDAY_MIDNIGHT_TIME;
     const isMorning = amPm === 'AM' && +hours >= MORNING_EVENING_TIME && !isMidnight;
@@ -68,7 +55,8 @@ const tick = () => {
 
     currentAmPm = amPm;
 
-    setTime(hours, mins, secs);
+    // eslint-disable-next-line sonarjs/constructor-for-side-effects, no-new
+    new ClockTime(resultTime, currentAmPm);
 
     if (currentHours !== +hours) {
         currentHours = +hours;
