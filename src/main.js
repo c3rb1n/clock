@@ -1,5 +1,6 @@
-import {ClockDate} from './components/Date/date.js';
-import {ClockTime} from './components/Time/time.js';
+import {ClockDate} from './components/ClockDate/clock-date.js';
+import {ClockTheme} from './components/ClockTheme/clock-theme.js';
+import {ClockTime} from './components/ClockTime/clock-time.js';
 
 const INTERVAL_TIME = 1000;
 const MORNING_EVENING_TIME = 7;
@@ -28,19 +29,15 @@ let currentHours;
 let currentAmPm;
 let currentTheme;
 
-const setBackgroundColor = body => {
+const setBackgroundColor = () => {
+    const body = document.querySelector('body');
     const backgroundIndex = currentHours === MIDDAY_MIDNIGHT_TIME ? ZERO_INDEX : currentHours;
     const currentBackgroundColor = (currentAmPm === 'AM' ? backgrounds : backgrounds.toReversed())[backgroundIndex];
 
     body.style = `background-color: ${currentBackgroundColor}`;
 };
 
-const setTheme = body => {
-    body.className = currentTheme;
-};
-
 const tick = () => {
-    const body = document.querySelector('body');
     const newDate = new Date().toLocaleDateString('ru');
     const newTime = new Date().toLocaleTimeString();
     const [time, amPm] = newTime.split(' ');
@@ -61,7 +58,7 @@ const tick = () => {
     if (currentHours !== +hours) {
         currentHours = +hours;
 
-        setBackgroundColor(body);
+        setBackgroundColor();
     }
 
     if (currentDate !== newDate) {
@@ -74,7 +71,8 @@ const tick = () => {
     if (currentTheme !== theme) {
         currentTheme = theme;
 
-        setTheme(body);
+        // eslint-disable-next-line sonarjs/constructor-for-side-effects, no-new
+        new ClockTheme(currentTheme);
     }
 };
 
